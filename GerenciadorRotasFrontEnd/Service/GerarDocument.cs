@@ -22,6 +22,7 @@ namespace GerenciadorRotasFrontEnd.Service
             {
                 rotas.Remove(rotas.Find(route => route[cidadeColuna].ToUpper() != cidade.Nome.ToUpper()));
                 //routes.Remove(routes.Find(route => route[serviceColumn].ToUpper() != serviceSelect.ToUpper()));
+                rotas.Remove(rotas.Find(route => route[serviceColumn].ToUpper() != service.ToUpper()));
             }
             var divisionTeam = rotas.Count / equipe.Count;
             var restDivision = rotas.Count % equipe.Count;
