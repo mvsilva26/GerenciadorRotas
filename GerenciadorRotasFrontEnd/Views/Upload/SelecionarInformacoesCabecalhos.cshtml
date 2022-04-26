@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "SelecionarInformacoesCabecalhos";
+    int valor = 0;
+}
+
+<h1>SelecionarInformacoesCabecalhos</h1>
+
+<div class="row">
+    <div class="form-control">
+        <form asp-action="GerarDoc">
+            <div class="col-md-4">
+                <label>Times</label><br />
+                <div class="form-group">
+
+                
+                @foreach (var team in ViewBag.EquipesCidades)
+                {
+                    <input name="ChecarEquipe" type="checkbox" value=@team.Id id="EquipeCidade">
+                    <label for="@team.Nome"> @team.Nome</label>
+                    <br />
+                }
+                 </div>
+
+                <div class="form-group">
+                @foreach (var opcao in ViewBag.CabecalhoExcel)
+                {
+                    <input name="ChecarCabecalho" type="checkbox" value=@valor id="TeamCity">
+                    <label for="@opcao"> @opcao</label>
+                        <br />
+                        valor++;
+                    }
+                </div>
+                <input type="submit" value="Gerar Documento" id="btnDoc" />
+
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "SelecionarCidadeEServico";
+}
+
+<h1>SelecionarCidadeEServico</h1>
+
+<form asp-action = "SelecionarInformacoesCabecalhos">
+<div class="form-group">
+				<label class="control-label">Cidades</label> <br /><br />
+				<select asp-items="@(new SelectList(ViewBag.TodasCidades,"Id", "Nome"))" class="form-control" name="cidadeNome" id="cidadeNome">
+					<option value="default">CIDADES...</option>
+				</select>
+			</div>
+
+<div class="form-group">
+				<label class="control-label">Serviços</label> <br /><br />			
+				<select asp-items="@(new SelectList(ViewBag.PegarServicoExcel))" class="form-control" name="servicoNome" id="servicoNome">
+					<option value="default">SERVIÇOS...</option>
+				</select>
+			</div>
+			<div>
+				<input type="submit" value="proximo" id="botaoProximo"/>
+			</div>
+</form>

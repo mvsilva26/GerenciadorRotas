@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@using (Html.BeginForm("LeituraArquivoExcel", "upload", FormMethod.Post, new { enctype = "multipart/form-data" })){
+<div class="text-center">
+		<br>
+		<h1 class="display-4 text-center">Upload</h1>
+		<br>
+		<label for="formFile" class="form-label mt-4">Escolha o Arquivo .xlsx</label>
+		<input class="form-control border border-secondary" type="file" id="formFile" name="file" multiple/>
+		@*@Html.TextBox("file", "", new {  type= "file"})*@ <br />
+		<input type="submit" value="Upload" class="btn btn-dark d-flex justify-content-center" id="btnNext"/>
+		@ViewBag.Message
+	</div>
+}
