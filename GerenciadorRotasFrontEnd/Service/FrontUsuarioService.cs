@@ -163,66 +163,66 @@ namespace GerenciadorRotasFrontEnd.Service
             }
         }
 
-        //HttpClient ApiConnection = new HttpClient();
-        //public static async Task<List<Usuario>> GetListaUsuario()
-        //{
-        //    List<Usuario> listausuarios = new();
+        HttpClient ApiConnection = new HttpClient();
+        public static async Task<List<Usuario>> GetListaUsuario()
+        {
+            List<Usuario> listausuarios = new();
 
-        //    HttpClient ApiConnection = new HttpClient();
+            HttpClient ApiConnection = new HttpClient();
 
-        //    HttpResponseMessage user = await ApiConnection.GetAsync("https://localhost:44319/api/Usuario");
-        //    string responseBody = await user.Content.ReadAsStringAsync();
-        //    listausuarios = JsonConvert.DeserializeObject<List<Usuario>>(responseBody);
+            HttpResponseMessage user = await ApiConnection.GetAsync("https://localhost:44319/api/Usuario");
+            string responseBody = await user.Content.ReadAsStringAsync();
+            listausuarios = JsonConvert.DeserializeObject<List<Usuario>>(responseBody);
 
-        //    return listausuarios;
+            return listausuarios;
 
-        //}
-
-
-
-
-        //public static async Task<Usuario> GetUsuarioName(string loginUser)
-        //{
-
-        //    Usuario usuario = new();
-
-        //    HttpClient ApiConnection = new HttpClient();
-
-        //    HttpResponseMessage user = await ApiConnection.GetAsync("https://localhost:44319/api/Usuario/login?loginUser=" + loginUser);
-        //    string responseBody = await user.Content.ReadAsStringAsync();
-        //    usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
-
-        //    return usuario;
+        }
 
 
 
-        //}
 
-        //public static void CreateUsuario(Usuario usuario)
-        //{
+        public static async Task<Usuario> GetUsuarioName(string loginUser)
+        {
 
-        //    HttpClient ApiConnection = new HttpClient();
+            Usuario usuario = new();
 
-        //    ApiConnection.PostAsJsonAsync("https://localhost:44319/api/Usuario", usuario);
-        //}
+            HttpClient ApiConnection = new HttpClient();
 
-        //public static void UpdateUsuario(string id, Usuario usuario)
-        //{
+            HttpResponseMessage user = await ApiConnection.GetAsync("https://localhost:44319/api/Usuario/login?loginUser=" + loginUser);
+            string responseBody = await user.Content.ReadAsStringAsync();
+            usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
 
-        //    HttpClient ApiConnection = new HttpClient();
+            return usuario;
 
-        //    ApiConnection.PutAsJsonAsync("https://localhost:44319/api/Usuario/" + id, usuario);
 
-        //}
 
-        //public static void DeleteUsuario(string id)
-        //{
+        }
 
-        //    HttpClient ApiConnection = new HttpClient();
+        public static void CreateUsuario(Usuario usuario)
+        {
 
-        //    ApiConnection.DeleteAsync("https://localhost:44319/api/Usuario/" + id);
+            HttpClient ApiConnection = new HttpClient();
 
-        //}
+            ApiConnection.PostAsJsonAsync("https://localhost:44319/api/Usuario", usuario);
+        }
+
+        public static void UpdateUsuario(string id, Usuario usuario)
+        {
+
+            HttpClient ApiConnection = new HttpClient();
+
+            ApiConnection.PutAsJsonAsync("https://localhost:44319/api/Usuario/" + id, usuario);
+
+        }
+
+        public static void DeleteUsuario(string id)
+        {
+
+            HttpClient ApiConnection = new HttpClient();
+
+            ApiConnection.DeleteAsync("https://localhost:44319/api/Usuario/" + id);
+
+        }
 
 
     }

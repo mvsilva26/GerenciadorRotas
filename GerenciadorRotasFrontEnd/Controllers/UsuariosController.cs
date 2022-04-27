@@ -4,6 +4,7 @@ using GerenciadorRotasFrontEnd.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace GerenciadorRotasFrontEnd.Controllers
     
     public class UsuariosController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             string user = "Anonymous";
@@ -40,7 +41,7 @@ namespace GerenciadorRotasFrontEnd.Controllers
             ViewBag.User = user;
             ViewBag.Authenticate = authenticate;
 
-            return View();
+            return View(await FrontUsuarioService.GetListaUsuario());
         }
 
         [HttpPost]
@@ -102,27 +103,120 @@ namespace GerenciadorRotasFrontEnd.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit()
+        // GET: Pessoa/Details/5
+        public async Task<IActionResult> Details(string id)
         {
-            //if (id == null)
-            //    return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            //var usuario = await UsuarioServices.GetId(id);
-            //if (usuario == null)
-            //    return NotFound("Usuário não encontrado");
+            var usuario = await FrontUsuarioService.GetId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
 
-            return RedirectToAction(nameof(Index));
+            return View(usuario);
         }
 
-        public IActionResult Delete()
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Nome,Estado")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        FrontUsuarioService.CreateUsuario(usuario);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(usuario);
+        //}
+
+        // GET: Usuario/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            //if (id == null)
-            //    return NoContent();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            //var usuario = await UsuarioServices.GetId(id);
-            //if (usuario == null)
-            //    return NotFound("Usuário não encontrado");
+            var usuario = await FrontUsuarioService.GetId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Nome")] Usuario usuario)
+        {
+            if (id != usuario.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var buscaUsuario = await FrontUsuarioService.GetId(id);
+
+                    FrontUsuarioService.UpdateUsuario(id, usuario);
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    //if (!PessoaExists(pessoa.Id))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(usuario);
+        }
+
+        //public IActionResult Delete()
+        //{
+        //    if (id == null)
+        //        return NoContent();
+
+        //    var usuario = await UsuarioServices.GetId(id);
+        //    if (usuario == null)
+        //        return NotFound("Usuário não encontrado");
+
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await FrontUsuarioService.GetId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var usuario = await FrontUsuarioService.GetId(id);
+            FrontUsuarioService.DeleteUsuario(id);
             return RedirectToAction(nameof(Index));
         }
     }
