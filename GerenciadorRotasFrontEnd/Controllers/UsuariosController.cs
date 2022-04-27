@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorRotasFrontEnd.Controllers
 {
-    
+   
     public class UsuariosController : Controller
     {
         public async Task<IActionResult> Index()

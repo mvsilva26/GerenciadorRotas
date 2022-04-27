@@ -12,6 +12,11 @@
 			<h5>Olá, @ViewBag.User!</h5>
 		</div>
 	</div>
+	<form asp-controller="Usuarios" asp-action="Logout">
+		<div class="form-group">
+					<input type="submit" value="Sair" class="btn btn-primary" />
+				</div>
+	</form>
 	<br />
 }else
 {
